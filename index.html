@@ -1,487 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhavi Agarwal — Trading Mentor</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr Mukul Agarwal — Market Analysis & Education</title>
+<meta name="description" content="Educational market analysis for Indian retail investors. Learn how to read Nifty, BankNifty, and options charts. Free learning community." />
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root {
-  --bg: #F5F2EE;
-  --surface: #EDEAE4;
-  --dark: #1A1916;
-  --mid: #5A564F;
-  --light: #9C9890;
-  --accent: #2B5F4B;
-  --telegram: #0088CC;
-  --border: rgba(26,25,22,0.1);
-  --glass: rgba(237, 234, 228, 0.6);
-  --green-glow: rgba(43, 95, 75, 0.15);
-  --gold: #A87F32;
-  --gold-bg: rgba(197, 160, 89, 0.12);
-}
-
-html, body {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--dark);
-  font-family: "DM Sans", sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Header styling */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 48px;
-  z-index: 100;
-}
-
-.logo {
-  font-family: "DM Serif Display", serif;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--dark);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.logo em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-/* Actions & Buttons */
-.btn-tg {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--telegram);
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-  text-decoration: none;
-  font-family: "DM Sans", sans-serif;
-  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.2);
-}
-
-.btn-tg:hover {
-  background: #0077B3;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 136, 204, 0.3);
-}
-
-.btn-tg svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-  flex-shrink: 0;
-}
-
-/* Main Layout */
-.page {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 100px 48px 48px 48px;
-  gap: 64px;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-  animation: up .7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  letter-spacing: 3.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: 24px;
-}
-
-.eyebrow-line {
-  width: 24px;
-  height: 1.5px;
-  background: var(--accent);
-}
-
-h1 {
-  font-family: "DM Serif Display", serif;
-  font-size: clamp(38px, 4.5vw, 60px);
-  line-height: 1.1;
-  font-weight: 400;
-  margin-bottom: 24px;
-  letter-spacing: -0.5px;
-}
-
-h1 em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-.desc {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--mid);
-  font-weight: 400;
-  max-width: 480px;
-  margin-bottom: 36px;
-}
-
-/* Instruments Tags */
-.instruments {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.tag {
-  background: var(--surface);
-  color: var(--dark);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: 1px solid rgba(26,25,22,0.06);
-  transition: all 0.2s ease;
-}
-
-.tag:hover {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  transform: translateY(-1px);
-}
-
-/* Redirection Area */
-.countdown-box {
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 12px;
-  max-width: 480px;
-  box-shadow: 0 8px 32px rgba(26,25,22,0.03);
-}
-
-.countdown-bar {
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.countdown-track {
-  flex: 1;
-  height: 3px;
-  background: var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.countdown-fill {
-  height: 100%;
-  background: var(--telegram);
-  width: 100%;
-  transform-origin: left;
-  animation: shrink 7s linear forwards;
-}
-
-.countdown-txt {
-  font-size: 12px;
-  color: var(--mid);
-  font-weight: 500;
-}
-
-.countdown-status {
-  font-size: 13px;
-  color: var(--light);
-}
-
-/* Right Column Visual components */
-.right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  animation: up .9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.visual-card {
-  width: 100%;
-  max-width: 420px;
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: 0 20px 48px rgba(26,25,22,0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.visual-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, var(--green-glow) 0%, transparent 60%);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.card-header {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.card-badge {
-  background: var(--gold-bg);
-  color: var(--gold);
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.card-title {
-  font-family: "DM Serif Display", serif;
-  font-size: 20px;
-  color: var(--dark);
-}
-
-/* Image Container styling */
-.image-container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  border: 1px solid rgba(26,25,22,0.08);
-  box-shadow: 0 8px 24px rgba(26,25,22,0.04);
-  background: #fff;
-}
-
-.record-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.visual-card:hover .record-img {
-  transform: scale(1.04);
-}
-
-/* Info Stats Rows */
-.stat-list {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: rgba(26,25,22,0.02);
-  border: 1px solid rgba(26,25,22,0.04);
-  border-radius: 8px;
-  font-size: 13px;
-}
-
-.stat-label {
-  color: var(--mid);
-  font-weight: 500;
-}
-
-.stat-val {
-  font-weight: 700;
-  color: var(--accent);
-}
-
-/* Animations */
-@keyframes shrink {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-}
-
-@keyframes up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #0a0e1a;
+    color: #e8ecf4;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button, .btn { font-family: inherit; cursor: pointer; border: none; }
 
-/* Responsive Breakpoints */
-@media (max-width: 992px) {
-  .page {
-    grid-template-columns: 1fr;
-    padding-top: 120px;
-    gap: 48px;
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #111727;
+    --bg-3: #1a2236;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8ecf4;
+    --text-dim: #9aa3b8;
+    --text-faint: #6b7280;
+    --accent: #f5b800;
+    --accent-2: #ffd84d;
+    --telegram: #229ED9;
+    --telegram-hover: #1e8bc3;
+    --success: #10b981;
+  }
+
+  .disclaimer-bar {
+    background: #1a1208;
+    color: #f5b800;
     text-align: center;
+    padding: 8px 16px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(245, 184, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  
-  .left {
+
+  .nav {
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    position: sticky;
+    top: 32px;
+    z-index: 90;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
-  
-  .desc {
-    max-width: 540px;
+  .logo {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
   }
-  
-  .countdown-box {
-    width: 100%;
-    max-width: 540px;
-  }
-  
-  .right {
-    padding-bottom: 48px;
-  }
-}
-
-@media (max-width: 600px) {
-  .header {
-    padding: 0 24px;
-  }
-  
-  .page {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-  
-  .btn-tg {
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    background: var(--telegram);
+    color: #fff;
     padding: 10px 18px;
-    font-size: 13px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
   }
-}
+  .nav-cta:hover { background: var(--telegram-hover); }
+
+  .hero {
+    padding: 80px 24px 60px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at top, rgba(245, 184, 0, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  }
+  .hero-inner { max-width: 880px; margin: 0 auto; }
+  .credential-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 184, 0, 0.1);
+    border: 1px solid rgba(245, 184, 0, 0.3);
+    color: var(--accent-2);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .credential-badge::before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .profile-name {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+  .profile-name strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .subhead {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .audience {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .btn-primary {
+    background: var(--telegram);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(34, 158, 217, 0.3);
+  }
+  .btn-primary:hover {
+    background: var(--telegram-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(34, 158, 217, 0.4);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--text-dim);
+    background: rgba(255,255,255,0.03);
+  }
+  .hero-disclaimer {
+    font-size: 13px;
+    color: var(--text-faint);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .stats {
+    background: var(--bg-2);
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  section.content {
+    padding: 80px 24px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 17px;
+    margin-bottom: 56px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .learn-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: all 0.2s;
+  }
+  .learn-card:hover {
+    border-color: rgba(245, 184, 0, 0.3);
+    transform: translateY(-2px);
+  }
+  .learn-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(245, 184, 0, 0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .learn-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .learn-card p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .how-it-works {
+    background: var(--bg-2);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    counter-reset: step;
+  }
+  .step {
+    text-align: center;
+    position: relative;
+  }
+  .step-num {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #0a0e1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+  }
+  .step h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .step p {
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  .testimonial-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+  }
+  .testimonial-quote {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    color: var(--text);
+    font-style: italic;
+  }
+  .testimonial-author {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .testimonial-author strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cta-section {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .cta-section p {
+    color: var(--text-dim);
+    font-size: 17px;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-disclaimer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-faint);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  footer {
+    background: #060912;
+    padding: 48px 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .footer-disclaimer {
+    background: rgba(245, 184, 0, 0.05);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .footer-disclaimer strong { color: var(--accent); }
+  .footer-meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 20px 40px; }
+    section.content { padding: 56px 20px; }
+    .stats-inner { grid-template-columns: 1fr; gap: 20px; }
+    .testimonial-card { padding: 28px 20px; }
+    .footer-meta { flex-direction: column; text-align: center; }
+  }
 </style>
 </head>
 <body>
 
-<header class="header">
-  <a href="#" class="logo">Bhavi Agarwal<em>.</em></a>
-  <a href="https://t.me/+Ph34S_SVQj5kNTk0" class="btn-tg">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15.82-.71 4.13-1 5.71-.12.67-.37.9-.6 1-.52.22-1.12-.17-1.63-.5-.79-.52-1.24-.85-2-1.35-.89-.58-.31-.9.19-1.42.13-.14 2.39-2.19 2.43-2.36.01-.02.01-.1-.05-.15s-.15-.03-.21-.02c-.09.02-1.52.97-4.3 2.84-.41.28-.78.42-1.11.41-.36 0-1.06-.2-1.58-.37-.64-.21-1.15-.32-1.11-.68.02-.19.28-.38.77-.58 3.01-1.31 5.02-2.18 6.03-2.6.96-.39 2.03-.54 2.69-.54.15 0 .48.03.69.2.18.15.23.36.21.56z"/>
-    </svg>
-    Join Telegram Channel
-  </a>
+<!-- ============ STICKY DISCLAIMER BAR ============ -->
+<div class="disclaimer-bar">
+  ⚠️ Educational content only. Not investment advice. Investments in securities markets are subject to market risks.
+</div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">Dr Mukul <span>Agarwal</span></div>
+    <a href="https://t.me/+Ph34S_SVQj5kNTk0" class="nav-cta" target="_blank" rel="noopener">Join Free</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="profile-name"><strong>Dr Mukul Agarwal</strong><br />Market Educator & Analyst</p>
+    <div class="credential-badge">10+ Years in Indian Markets</div>
+    <h1>
+      Learn the Markets.<br />
+      <span class="highlight">Decide for Yourself.</span>
+    </h1>
+    <p class="subhead">
+      Daily educational breakdowns of Nifty, BankNifty, and options charts.
+      No tips. No "buy this" calls. Just clear thinking about the markets.
+    </p>
+    <p class="audience">For retail investors who want to understand, not depend.</p>
+
+    <div class="hero-ctas">
+      <a href="https://t.me/+Ph34S_SVQj5kNTk0" class="btn-primary" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        Join Free Learning Community
+      </a>
+      <a href="#learn" class="btn-secondary">See What You'll Learn</a>
+    </div>
+
+    <p class="hero-disclaimer">
+      This is a free educational community for learning how to read the markets.
+      We do not provide tips, signals, or personalized investment recommendations.
+    </p>
+  </div>
 </header>
 
-<main class="page">
-  <section class="left">
-    <div class="eyebrow">
-      <div class="eyebrow-line"></div>
-      Trading Mentor
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">5,000+</div>
+      <div class="stat-label">Community Members</div>
     </div>
-    <h1>Simplify Your Trading, <em>Maximize</em> Growth</h1>
-    <p class="desc">
-      Get access to real-time market analysis, trade setups, and options strategies direct from Bhavi Agarwal. Join our channel to trade smarter.
-    </p>
-    
-    <div class="instruments">
-      <span class="tag">BANKNIFTY</span>
-      <span class="tag">NIFTY</span>
-      <span class="tag">STOCK OPTION</span>
-      <span class="tag">MIDCAP NIFTY</span>
-      <span class="tag">SENSEX</span>
+    <div>
+      <div class="stat-num">10+ yrs</div>
+      <div class="stat-label">Market Experience</div>
     </div>
-    
-    <div class="countdown-box">
-      <div class="countdown-bar">
-        <div class="countdown-track">
-          <div class="countdown-fill"></div>
-        </div>
-        <div class="countdown-txt" id="timer-text">7s</div>
-      </div>
-      <div class="countdown-status" id="status-text">Connecting to official Telegram channel...</div>
+    <div>
+      <div class="stat-num">Daily</div>
+      <div class="stat-label">Educational Posts</div>
     </div>
-  </section>
-  
-  <section class="right">
-    <div class="visual-card">
-      <div class="card-header">
-        <span class="card-title">Guinness World Record</span>
-        <span class="card-badge">Record Holder</span>
-      </div>
-      
-      <div class="image-container">
-        <img src="preview.webp" alt="Bhavi Agarwal — Guinness World Record" class="record-img">
-      </div>
-      
-      <div class="stat-list">
-        <div class="stat-item">
-          <span class="stat-label">Official Achievement</span>
-          <span class="stat-val">Largest Investment Lesson</span>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+  </div>
+</div>
 
-<script>
-  const TELEGRAM_URL = "https://t.me/+Ph34S_SVQj5kNTk0";
-  let secondsRemaining = 7;
-  const timerTextEl = document.getElementById("timer-text");
-  const statusTextEl = document.getElementById("status-text");
+<!-- ============ WHAT YOU'LL LEARN ============ -->
+<section class="content" id="learn">
+  <div class="container">
+    <h2 class="section-title">What You'll Learn</h2>
+    <p class="section-subtitle">Educational content focused on building real market understanding.</p>
 
-  // Visual countdown timer
-  const countdownInterval = setInterval(() => {
-    secondsRemaining--;
-    if (secondsRemaining <= 0) {
-      timerTextEl.textContent = "0s";
-      statusTextEl.textContent = "Opening Telegram...";
-      clearInterval(countdownInterval);
-      window.location.href = TELEGRAM_URL;
-    } else {
-      timerTextEl.textContent = secondsRemaining + "s";
-    }
-  }, 1000);
-</script>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="learn-icon">📊</div>
+        <h3>How to Read Charts</h3>
+        <p>Daily breakdowns of Nifty and BankNifty price action — patterns, structure, and momentum explained step by step.</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">📚</div>
+        <h3>Options Strategies</h3>
+        <p>Educational walkthroughs of spreads, hedging, and risk-defined setups. The reasoning, not just the trade.</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🧠</div>
+        <h3>Market Psychology</h3>
+        <p>Why markets move the way they do — sentiment, macro context, and what drives real price discovery.</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🛡️</div>
+        <h3>Risk Awareness</h3>
+        <p>How professionals think about position sizing, stop losses, and protecting capital. The unglamorous side that actually matters.</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">💡</div>
+        <h3>Beginner Concepts</h3>
+        <p>New to markets? We explain the basics — indices, options greeks, IV, PCR — in plain English.</p>
+      </div>
+      <div class="learn-card">
+        <div class="learn-icon">🤝</div>
+        <h3>Discussion Community</h3>
+        <p>Ask questions. Share your charts. Learn alongside 5,000+ serious retail investors in a moderated, signal-free space.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="content how-it-works">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Three simple steps. No fees. No "VIP" groups. Just learning.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Join the Community</h3>
+        <p>Click the button below. Takes 10 seconds. Free Telegram community.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Read the Daily Posts</h3>
+        <p>Every morning, Dr Mukul shares a chart breakdown with reasoning, context, and educational notes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Build Your Own View</h3>
+        <p>Use the framework to form your own opinions on the markets. Independent thinking over dependence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="content">
+  <div class="container">
+    <div class="testimonial-card">
+      <p class="testimonial-quote">
+        "I joined expecting tips. Stayed because Dr Mukul actually teaches you how to think
+        about the markets. The best free education I've found in India."
+      </p>
+      <div class="testimonial-author">
+        <strong>Rahul M.</strong>
+        Retail Investor, Mumbai
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="content cta-section">
+  <div class="container">
+    <h2>Start Learning Today</h2>
+    <p>Join 5,000+ retail investors who chose education over noise. Free to join, free to learn.</p>
+    <a href="https://t.me/+Ph34S_SVQj5kNTk0" class="btn-primary" target="_blank" rel="noopener" style="font-size: 18px; padding: 18px 40px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+      Join Free Learning Community
+    </a>
+    <p class="cta-disclaimer">Free to join. Educational content only. No tips, signals, or personalized advice.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-disclaimer">
+      <strong>Important Disclaimer:</strong> Investments in securities markets are subject to market risks.
+      Please read all related documents carefully before investing. Past performance is not indicative of future results.
+      All content shared on this website and associated community channels is for <strong>educational purposes only</strong>
+      and does not constitute investment advice, financial advice, trading advice, or any other form of professional advice.
+      We do not provide tips, signals, or personalized investment recommendations. You should not make any investment decision
+      based solely on the content shared here. Always consult with a qualified, SEBI-registered financial advisor before
+      making any investment decision. By joining this community, you acknowledge that you understand these terms.
+    </div>
+    <div class="footer-meta">
+      <div>© 2026 Dr Mukul Agarwal. All rights reserved.</div>
+      <div>Educational Content • Not Investment Advice</div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
